@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ورود ویژه</title>
+  <style>
+    :root {
+      --bg1: #070812;
+      --bg2: #11152a;
+      --bg3: #1a1038;
+      --pink: #ff4da6;
+      --pink2: #ff7ac3;
+      --blue: #56ccf2;
+      --blue2: #7ce7ff;
+      --violet: #9b6dff;
+      --gold: #ffd166;
+      --white: #ffffff;
+      --glass: rgba(255, 255, 255, 0.08);
+      --glass-strong: rgba(255, 255, 255, 0.12);
+      --border: rgba(255, 255, 255, 0.14);
+      --shadow: 0 25px 80px rgba(0, 0, 0, 0.55);
+      --text: #f5f7ff;
+      --muted: #bcc5e0;
+      --danger: #ff6b81;
+      --success: #6ef3b0;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      margin: 0;
+      width: 100%;
+      min-height: 100%;
+      font-family: Tahoma, Arial, sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(255, 77, 166, 0.20), transparent 20%),
+        radial-gradient(circle at top left, rgba(86, 204, 242, 0.16), transparent 24%),
+        radial-gradient(circle at bottom center, rgba(155, 109, 255, 0.18), transparent 28%),
+        linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
+      color: var(--text);
+      overflow: hidden;
+    }
+
+    body {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    /* پس‌زمینه‌های نورانی */
+    .bg-orbs {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.45;
+      animation: floatOrb 10s ease-in-out infinite alternate;
+    }
+
+    .orb1 {
+      width: 320px;
+      height: 320px;
+      top: -80px;
+      right: -80px;
+      background: rgba(255, 77, 166, 0.35);
+    }
+
+    .orb2 {
+      width: 260px;
+      height: 260px;
+      bottom: -70px;
+      left: -60px;
+      background: rgba(86, 204, 242, 0.30);
+      animation-duration: 13s;
+    }
+
+    .orb3 {
+      width: 220px;
+      height: 220px;
+      top: 50%;
+      left: 55%;
+      transform: translate(-50%, -50%);
+      background: rgba(155, 109, 255, 0.20);
+      animation-duration: 16s;
+    }
+
+    @keyframes floatOrb {
+      from { transform: translateY(0) scale(1); }
+      to { transform: translateY(25px) scale(1.08); }
+    }
+
+    /* ذرات شناور */
+    .particles {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.8);
+      box-shadow: 0 0 10px rgba(255,255,255,0.45);
+      animation: rise linear infinite;
+    }
+
+    @keyframes rise {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      20% {
+        opacity: 1;
+      }
+      to {
+        transform: translateY(-120vh);
+        opacity: 0;
+      }
+    }
+
+    /* کارت اصلی */
+    .wrap {
+      position: relative;
+      z-index: 2;
+      width: min(92vw, 430px);
+      animation: cardIn 1s cubic-bezier(.2,.8,.2,1);
+    }
+
+    @keyframes cardIn {
+      from {
+        opacity: 0;
+        transform: translateY(35px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 32px;
+      padding: 28px 22px 22px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.09), rgba(255,255,255,0.05));
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      isolation: isolate;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent 20%, rgba(255,255,255,0.10) 50%, transparent 80%);
+      transform: translateX(-100%);
+      animation: shine 5s linear infinite;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    @keyframes shine {
+      to { transform: translateX(100%); }
+    }
+
+    .card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .top-badge {
+      width: 78px;
+      height: 78px;
+      margin: 0 auto 16px;
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.22), rgba(255,255,255,0.08));
+      border: 1px solid rgba(255,255,255,0.16);
+      box-shadow:
+        0 12px 30px rgba(255, 77, 166, 0.22),
+        inset 0 1px 0 rgba(255,255,255,0.20);
+    }
+
+    .mini {
+      display: inline-block;
+      margin: 0 auto 10px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: #fff0c2;
+      background: rgba(255, 209, 102, 0.10);
+      border: 1px solid rgba(255, 209, 102, 0.22);
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      text-align: center;
+      font-size: clamp(24px, 6vw, 36px);
+      line-height: 1.4;
+      font-weight: 700;
+      background: linear-gradient(135deg, #ffffff, #ffd166, #ff8ecb, #7ce7ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      margin: 0 0 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .field {
+      position: relative;
+      margin-bottom: 14px;
+    }
+
+    .field .glow {
+      position: absolute;
+      inset: -2px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(255,77,166,0.35), rgba(86,204,242,0.25), rgba(155,109,255,0.30));
+      filter: blur(14px);
+      opacity: 0;
+      transition: 0.35s ease;
+      pointer-events: none;
+    }
+
+    .field:focus-within .glow {
+      opacity: 1;
+    }
+
+    .input-wrap {
+      position: relative;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      overflow: hidden;
+    }
+
+    .input-wrap::before {
+      content: "🔐";
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 18px;
+      opacity: 0.9;
+    }
+
+    input {
+      width: 100%;
+      border: none;
+      outline: none;
+      background: transparent;
+      color: var(--white);
+      font-size: 17px;
+      text-align: center;
+      padding: 17px 48px 17px 18px;
+      letter-spacing: 1px;
+      font-family: inherit;
+    }
+
+    input::placeholder {
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 0;
+    }
+
+    .btn {
+      width: 100%;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      border-radius: 18px;
+      padding: 15px 18px;
+      font-size: 15px;
+      font-weight: 800;
+      color: #170d27;
+      background: linear-gradient(135deg, var(--gold), var(--pink2), var(--blue2));
+      box-shadow:
+        0 15px 30px rgba(255, 77, 166, 0.22),
+        0 8px 20px rgba(86, 204, 242, 0.14);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+    }
+
+    .btn:hover {
+      filter: brightness(1.04);
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .error-box {
+      min-height: 28px;
+      margin-top: 14px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--danger);
+      opacity: 0;
+      transform: translateY(6px);
+      transition: 0.3s ease;
+    }
+
+    .error-box.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .footer-note {
+      margin-top: 18px;
+      text-align: center;
+      color: rgba(255,255,255,0.55);
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .shake {
+      animation: shake 0.45s ease;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-10px); }
+      40% { transform: translateX(8px); }
+      60% { transform: translateX(-6px); }
+      80% { transform: translateX(4px); }
+    }
+
+    .success-ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 32px;
+      border: 1px solid rgba(110, 243, 176, 0.35);
+      box-shadow: 0 0 35px rgba(110, 243, 176, 0.22);
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.3s ease;
+    }
+
+    .card.success .success-ring {
+      opacity: 1;
+    }
+
+    .loading-text {
+      margin-top: 8px;
+      text-align: center;
+      color: var(--success);
+      font-size: 13px;
+      opacity: 0;
+      transition: 0.25s ease;
+      height: 18px;
+    }
+
+    .loading-text.show {
+      opacity: 1;
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        padding: 24px 16px 18px;
+        border-radius: 26px;
+      }
+
+      .top-badge {
+        width: 68px;
+        height: 68px;
+        border-radius: 20px;
+        font-size: 30px;
+      }
+
+      .subtitle {
+        font-size: 13px;
+        margin-bottom: 18px;
+      }
+
+      input {
+        font-size: 16px;
+        padding: 15px 44px 15px 16px;
+      }
+
+      .btn {
+        font-size: 14px;
+        padding: 14px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-orbs">
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+  </div>
+
+  <div class="particles" id="particles"></div>
+
+  <div class="wrap">
+    <div class="card" id="card">
+      <div class="success-ring"></div>
+
+      <div class="top-badge">✨</div>
+
+      <div style="text-align:center;">
+        <div class="mini">ورود اختصاصی</div>
+      </div>
+
+      <h1>ورود به صفحه ویژه عدنان</h1>
+      <p class="subtitle">
+        برای ورود، رمز اختصاصی را وارد کن.<br>
+        این بخش فقط برای یک آدم خاص ساخته شده.
+      </p>
+
+      <div class="field">
+        <div class="glow"></div>
+        <div class="input-wrap">
+          <input
+            type="password"
+            id="pass"
+            placeholder="رمز رو وارد کن..."
+            maxlength="20"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <button class="btn" onclick="checkPass()">تأیید و ورود</button>
+
+      <div id="error-msg" class="error-box">عدنان جون اشتباهه</div>
+      <div id="loading-text" class="loading-text">در حال ورود...</div>
+
+      <div class="footer-note">
+        دسترسی فقط با رمز امکان‌پذیر است
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const secretPassword = "Adnan";
+    const targetUrl = "https://rezaas7.github.io/adnan/";
+
+    const passInput = document.getElementById("pass");
+    const errorMsg = document.getElementById("error-msg");
+    const loadingText = document.getElementById("loading-text");
+    const card = document.getElementById("card");
+    const particles = document.getElementById("particles");
+
+    function createParticles() {
+      for (let i = 0; i < 28; i++) {
+        const p = document.createElement("span");
+        p.className = "particle";
+        p.style.left = Math.random() * 100 + "vw";
+        p.style.bottom = "-" + (10 + Math.random() * 60) + "px";
+        p.style.animationDuration = (7 + Math.random() * 8) + "s";
+        p.style.animationDelay = (Math.random() * 6) + "s";
+        p.style.opacity = (0.2 + Math.random() * 0.8).toFixed(2);
+        particles.appendChild(p);
+      }
+    }
+
+    function showError() {
+      errorMsg.classList.add("show");
+      loadingText.classList.remove("show");
+      card.classList.remove("success");      card.classList.add("shake");
+
+      setTimeout(() => {
+        card.classList.remove("shake");
+      }, 450);
+    }
+
+    function hideError() {
+      errorMsg.classList.remove("show");
+    }
+
+    function checkPass() {
+      const input = passInput.value.trim();
+
+      hideError();
+
+      if (input === secretPassword) {
+        card.classList.add("success");
+        loadingText.classList.add("show");
+        errorMsg.classList.remove("show");
+
+        setTimeout(() => {
+          window.location.href = targetUrl;
+        }, 900);
+      } else {
+        showError();
+      }
+    }
+
+    passInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        checkPass();
+      }
+    });
+
+    passInput.addEventListener("input", () => {
+      if (passInput.value.length > 0) {
+        hideError();
+      }
+    });
+
+    createParticles();
+  </script>
+</body>
+</html>
